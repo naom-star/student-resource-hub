@@ -1,0 +1,6 @@
+{
+  "name": "AcademiaHub - Student Resource & Success Hub",
+  "description": "Comprehensive, user-friendly Student Resource Hub supporting high school and university students across academics, careers, wellness, finance, and productivity.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

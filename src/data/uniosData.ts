@@ -1,0 +1,447 @@
+import { 
+  StudentProfile, DegreeAuditCategory, CourseOffering, 
+  ShuttleRoute, DiningHall, CampusJob, TimesheetEntry, 
+  TechnicalIntegrationSpec, UniModuleId 
+} from '../types/unios';
+
+export const INITIAL_STUDENT_PROFILE: StudentProfile = {
+  id: 'stu_9482103',
+  name: 'Maya Lin',
+  studentIdNumber: 'U8294-0192',
+  email: 'mlin@university.edu',
+  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80',
+  classYear: 'Junior',
+  major: 'B.S. Computer Science',
+  minor: 'Cognitive Science',
+  college: 'College of Arts & Sciences',
+  gpa: 3.84,
+  creditsEarned: 88,
+  creditsRequired: 120,
+  dormBuilding: 'West Campus Quad - Hall B',
+  dormRoom: 'Room 412',
+  diningDollars: 342.50,
+  mealSwipesLeft: 42,
+  workStudyEligible: true,
+};
+
+export const DEGREE_AUDIT_DATA: DegreeAuditCategory[] = [
+  {
+    id: 'cs_core',
+    title: 'Computer Science Major Core',
+    creditsCompleted: 36,
+    creditsTotal: 44,
+    courses: [
+      { code: 'CS 110', name: 'Intro to Computing & Data Structures', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2024' },
+      { code: 'CS 210', name: 'Computer Systems Architecture', credits: 4, status: 'completed', grade: 'A-', term: 'Spring 2025' },
+      { code: 'CS 220', name: 'Discrete Mathematical Structures', credits: 4, status: 'completed', grade: 'B+', term: 'Spring 2025' },
+      { code: 'CS 310', name: 'Design & Analysis of Algorithms', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2025' },
+      { code: 'CS 330', name: 'Operating Systems Engineering', credits: 4, status: 'in_progress', term: 'Current Term' },
+      { code: 'CS 350', name: 'Database Management Systems', credits: 4, status: 'in_progress', term: 'Current Term' },
+      { code: 'CS 410', name: 'Software Engineering Capstone I', credits: 4, status: 'remaining', prereqs: ['CS 310', 'CS 330'] },
+      { code: 'CS 420', name: 'Distributed Systems & Cloud', credits: 4, status: 'remaining', prereqs: ['CS 330'] },
+    ],
+  },
+  {
+    id: 'math_cognate',
+    title: 'Mathematics & Science Foundation',
+    creditsCompleted: 20,
+    creditsTotal: 20,
+    courses: [
+      { code: 'MATH 131', name: 'Calculus I: Single Variable', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2024' },
+      { code: 'MATH 132', name: 'Calculus II: Series & Integration', credits: 4, status: 'completed', grade: 'A', term: 'Spring 2025' },
+      { code: 'MATH 240', name: 'Linear Algebra & Applications', credits: 4, status: 'completed', grade: 'A-', term: 'Fall 2025' },
+      { code: 'STAT 301', name: 'Probability & Statistics for Engineers', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2025' },
+      { code: 'PHYS 151', name: 'General Physics I: Mechanics with Lab', credits: 4, status: 'completed', grade: 'B+', term: 'Spring 2025' },
+    ],
+  },
+  {
+    id: 'gen_ed',
+    title: 'University General Education Core',
+    creditsCompleted: 24,
+    creditsTotal: 32,
+    courses: [
+      { code: 'WRIT 101', name: 'Academic Writing & Critical Inquiry', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2024' },
+      { code: 'HIST 210', name: 'Global Geopolitics & Modern Society', credits: 4, status: 'completed', grade: 'A-', term: 'Spring 2025' },
+      { code: 'PHIL 140', name: 'Ethics in the Digital Age', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2025' },
+      { code: 'PSYC 101', name: 'Introduction to Cognitive Neuroscience', credits: 4, status: 'completed', grade: 'A', term: 'Spring 2025' },
+      { code: 'ARTS 180', name: 'Visual Media & UX Principles', credits: 4, status: 'in_progress', term: 'Current Term' },
+      { code: 'GEN 400', name: 'Senior Interdisciplinary Seminar', credits: 4, status: 'remaining', prereqs: ['Senior Standing'] },
+    ],
+  },
+  {
+    id: 'electives',
+    title: 'Cognitive Science Electives',
+    creditsCompleted: 8,
+    creditsTotal: 24,
+    courses: [
+      { code: 'COG 200', name: 'Foundations of Human Cognition', credits: 4, status: 'completed', grade: 'A', term: 'Fall 2025' },
+      { code: 'COG 320', name: 'Natural Language Processing & Linguistics', credits: 4, status: 'in_progress', term: 'Current Term' },
+      { code: 'CS 485', name: 'Human-Computer Interaction Studio', credits: 4, status: 'remaining', prereqs: ['CS 310'] },
+      { code: 'PHIL 330', name: 'Philosophy of Artificial Intelligence', credits: 4, status: 'remaining' },
+    ],
+  },
+];
+
+export const UPCOMING_COURSES: CourseOffering[] = [
+  {
+    id: 'c_cs410',
+    code: 'CS 410',
+    title: 'Software Engineering Capstone I',
+    credits: 4,
+    instructor: 'Dr. Sarah Henderson',
+    schedule: 'Mon/Wed 10:00 AM - 11:30 AM',
+    location: 'Turing Hall 302',
+    seatsOpen: 3,
+    totalSeats: 35,
+    waitlistLength: 0,
+    prerequisites: ['CS 310', 'CS 330'],
+    prerequisitesSatisfied: true,
+    status: 'open',
+  },
+  {
+    id: 'c_cs420',
+    code: 'CS 420',
+    title: 'Distributed Systems & Cloud Computing',
+    credits: 4,
+    instructor: 'Prof. Marcus Vance',
+    schedule: 'Tue/Thu 1:00 PM - 2:30 PM',
+    location: 'Engineering Pavilion 110',
+    seatsOpen: 0,
+    totalSeats: 40,
+    waitlistLength: 4,
+    prerequisites: ['CS 330'],
+    prerequisitesSatisfied: true,
+    status: 'waitlist',
+  },
+  {
+    id: 'c_cs485',
+    code: 'CS 485',
+    title: 'Human-Computer Interaction Studio',
+    credits: 4,
+    instructor: 'Dr. Elena Rostova',
+    schedule: 'Wed 2:00 PM - 5:00 PM',
+    location: 'Design & Media Lab 204',
+    seatsOpen: 8,
+    totalSeats: 24,
+    waitlistLength: 0,
+    prerequisites: ['CS 310'],
+    prerequisitesSatisfied: true,
+    status: 'open',
+  },
+  {
+    id: 'c_cs580',
+    code: 'CS 580',
+    title: 'Advanced Deep Reinforcement Learning',
+    credits: 4,
+    instructor: 'Dr. Kevin Zhao',
+    schedule: 'Tue/Thu 3:30 PM - 5:00 PM',
+    location: 'Data Science Complex 401',
+    seatsOpen: 0,
+    totalSeats: 25,
+    waitlistLength: 12,
+    prerequisites: ['CS 480', 'MATH 310'],
+    prerequisitesSatisfied: false,
+    status: 'closed',
+  },
+];
+
+export const SHUTTLE_ROUTES: ShuttleRoute[] = [
+  {
+    id: 'blue_circulator',
+    name: 'Blue Campus Circulator (Quad - Science - Dorms)',
+    color: '#2563EB',
+    status: 'Normal Service',
+    currentEtaMinutes: 3,
+    currentStop: 'Science & Engineering Library',
+    nextStops: [
+      { stopName: 'Science Library Station', etaMins: 3 },
+      { stopName: 'West Quad Dormitories', etaMins: 7 },
+      { stopName: 'Student Union Hub', etaMins: 11 },
+      { stopName: 'Athletic Complex & Arena', etaMins: 16 },
+    ],
+  },
+  {
+    id: 'gold_express',
+    name: 'Gold Commuter Rail & Downtown Express',
+    color: '#D97706',
+    status: 'Slight Delay',
+    currentEtaMinutes: 8,
+    currentStop: 'Main Gate & Transit Center',
+    nextStops: [
+      { stopName: 'Main Gate Terminal', etaMins: 8 },
+      { stopName: 'Downtown University Heights', etaMins: 14 },
+      { stopName: 'Metro North Commuter Station', etaMins: 22 },
+    ],
+  },
+];
+
+export const DINING_HALLS: DiningHall[] = [
+  {
+    id: 'north_hall',
+    name: 'North Quad Commons & Artisan Grill',
+    status: 'Open',
+    hours: '7:00 AM - 9:00 PM',
+    occupancy: 48,
+    featuredMenu: [
+      'Grilled Rosemary Lemon Chicken',
+      'Wild Mushroom & Truffle Farro (Vegan)',
+      'Brick-Oven Roasted Vegetables',
+      'Organic Salad Bar & Acai Bowls',
+    ],
+  },
+  {
+    id: 'student_center',
+    name: 'Student Center Food Hall & Global Kitchen',
+    status: 'Open',
+    hours: '11:00 AM - 11:00 PM',
+    occupancy: 74,
+    featuredMenu: [
+      'Tokyo Teriyaki Poke Bowls',
+      'Handmade Chicken & Paneer Tikka',
+      'Smash Burgers & Crinkle Fries',
+      'Boba Tea Bar & Fair-Trade Espresso',
+    ],
+  },
+  {
+    id: 'south_grill',
+    name: 'South Gate Cafe & Late Night Pantry',
+    status: 'Open',
+    hours: '8:00 AM - 1:00 AM',
+    occupancy: 25,
+    featuredMenu: [
+      'Artisan Paninis & Caprese Flatbreads',
+      'Smoothies & Protein Bowls',
+      'Grab-and-Go Sushi Rolls',
+    ],
+  },
+];
+
+export const CAMPUS_JOBS_DATA: CampusJob[] = [
+  {
+    id: 'job_1',
+    title: 'Computer Science Peer Tutor / Teaching Assistant',
+    department: 'Department of Computer Science',
+    type: 'TA / RA',
+    wage: '$18.50 / hour',
+    hoursPerWeek: '10 - 12 hrs/wk',
+    deadline: 'Friday, Dec 1',
+    applied: false,
+  },
+  {
+    id: 'job_2',
+    title: 'Digital Media Lab Student Operations Assistant',
+    department: 'University Libraries & Media Centers',
+    type: 'Federal Work-Study',
+    wage: '$17.00 / hour',
+    hoursPerWeek: '8 - 15 hrs/wk',
+    deadline: 'Rolling Admission',
+    applied: true,
+  },
+  {
+    id: 'job_3',
+    title: 'Cognitive Science Undergraduate Research Assistant',
+    department: 'Visual Perception Lab (PI: Dr. Rostova)',
+    type: 'TA / RA',
+    wage: '$19.00 / hour',
+    hoursPerWeek: '10 hrs/wk',
+    deadline: 'Dec 10',
+    applied: false,
+  },
+  {
+    id: 'job_4',
+    title: 'Student Life Event & Campus Ambassador',
+    department: 'Division of Student Affairs',
+    type: 'Departmental',
+    wage: '$16.50 / hour',
+    hoursPerWeek: '6 - 10 hrs/wk',
+    deadline: 'Jan 15',
+    applied: false,
+  },
+];
+
+export const INITIAL_TIMESHEET: TimesheetEntry[] = [
+  {
+    id: 'ts_01',
+    date: 'Mon, Nov 02',
+    jobTitle: 'Digital Media Lab Assistant',
+    hoursWorked: 3.5,
+    hourlyRate: 17.0,
+    notes: 'Assisted 14 students with 3D printers and laser cutter calibration.',
+    status: 'Approved',
+  },
+  {
+    id: 'ts_02',
+    date: 'Wed, Nov 04',
+    jobTitle: 'Digital Media Lab Assistant',
+    hoursWorked: 4.0,
+    hourlyRate: 17.0,
+    notes: 'Supervised lab closing, audio equipment checkout, inventory audit.',
+    status: 'Approved',
+  },
+  {
+    id: 'ts_03',
+    date: 'Fri, Nov 06',
+    jobTitle: 'Digital Media Lab Assistant',
+    hoursWorked: 3.0,
+    hourlyRate: 17.0,
+    notes: 'Render farm monitoring and workshop setup for CS 485.',
+    status: 'Submitted',
+  },
+];
+
+export const ENTERPRISE_SPECS: Record<UniModuleId, TechnicalIntegrationSpec> = {
+  academic: {
+    module: 'Academic Registrar & Degree Audit Engine',
+    systemName: 'SIS / Degree Audit Core',
+    enterpriseVendor: 'Ellucian Banner Student / Workday Student / Degree Works API',
+    protocol: 'REST JSON',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/api/v1/students/{studentId}/degree-audit',
+        description: 'Retrieves complete degree evaluation tree, credits completed, GPA, and unmet requirements.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/registration/enroll-batch',
+        description: 'Executes atomic 1-tap course registration and waitlist reservation within student eligibility window.',
+        payloadOrParams: '{ termId: "202710", crns: ["14920", "18291"] }',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/courses/{courseCode}/prerequisites/check',
+        description: 'Instant DAG graph resolver checking completed transcript courses against prerequisite chain.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/transcripts/official/order',
+        description: 'Automated webhook to National Student Clearinghouse for cryptographic e-transcript delivery.',
+      },
+    ],
+    pushNotificationTriggers: [
+      { event: 'Registration Window Open', priority: 'P0 Urgent', copyPreview: '🚨 Your Fall registration window is NOW LIVE. Tap to execute your saved 1-tap cart.' },
+      { event: 'Waitlist Seat Cleared', priority: 'P0 Urgent', copyPreview: '🎉 A seat opened in CS 410! You have 24 hours to accept before it passes to #2.' },
+      { event: 'Drop/Add Deadline Alert', priority: 'P1 Time-Sensitive', copyPreview: '⚠️ 48 hours remaining until the official course drop/add deadline without a "W" on transcript.' },
+    ],
+  },
+  campus: {
+    module: 'Campus Life, Housing & Facilities Navigator',
+    systemName: 'Access Control, Dining & Transit Engine',
+    enterpriseVendor: 'CBORD / Transact Campus Mobile Credential + TransLoc GTFS-RT + TMA Systems',
+    protocol: 'WebSockets / GTFS-RT',
+    endpoints: [
+      {
+        method: 'POST',
+        path: '/api/v2/nfc/access-token/dorm-unlock',
+        description: 'Generates time-bound cryptographic token for Apple Wallet / Google Wallet NFC door strike.',
+        payloadOrParams: '{ credentialId: "NFC_8829", lockId: "WEST_QUAD_412" }',
+      },
+      {
+        method: 'WSS',
+        path: 'wss://transit.university.edu/gtfs-rt/vehicles',
+        description: 'Real-time WebSocket streaming GPS telematics of all campus shuttles every 1.5 seconds.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/facilities/laundry/rooms/{roomId}/status',
+        description: 'Queries networked smart washers and dryers for real-time status and cycle countdowns.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/housing/work-orders/submit',
+        description: 'Submits dorm maintenance work ticket with photo upload and technician priority routing.',
+      },
+    ],
+    pushNotificationTriggers: [
+      { event: 'Laundry Cycle Finished', priority: 'P1 Time-Sensitive', copyPreview: '🧺 Washer #3 finished its cycle in West Quad Hall B. Please transfer your clothes within 10 mins.' },
+      { event: 'Maintenance Tech Dispatched', priority: 'P2 Informational', copyPreview: '🔧 Maintenance order #W-9821 (Radiator Valve) assigned. Tech arriving today between 1-3 PM.' },
+      { event: 'Shuttle Arrival 2-Min Warning', priority: 'P1 Time-Sensitive', copyPreview: '🚌 Blue Circulator is 2 minutes from Science Library Station.' },
+    ],
+  },
+  career: {
+    module: 'Career Center & Alumni Mentorship Network',
+    systemName: 'Campus Recruiting & Mentorship API',
+    enterpriseVendor: 'Handshake Enterprise API / 12Twenty / PeopleGrove Mentorship',
+    protocol: 'REST JSON',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/api/v1/jobs/on-campus/work-study',
+        description: 'Fetches verified Federal Work-Study and university departmental openings with payroll codes.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/career-fair/fastpass/generate-badge',
+        description: 'Issues cryptographic dynamic QR code containing student major, GPA, and verified resume link.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/alumni/mentorship/request-chat',
+        description: 'Initiates a 15-minute coffee chat invitation syncing with alumnus calendar availability.',
+      },
+    ],
+    pushNotificationTriggers: [
+      { event: 'On-Campus Interview Scheduled', priority: 'P0 Urgent', copyPreview: '💼 Interview confirmed: Google SWE Intern, Tomorrow at 10:00 AM, Career Center Room 214.' },
+      { event: 'Resume Advisor Feedback Ready', priority: 'P1 Time-Sensitive', copyPreview: '📄 Your resume review is complete. Advisor Dr. Chen left 4 inline annotations.' },
+      { event: 'New TA Opening in CS', priority: 'P2 Informational', copyPreview: '⭐ New opening matching your profile: CS 110 Peer TA ($18.50/hr). Deadline in 5 days.' },
+    ],
+  },
+  safety: {
+    module: 'Student Health, Counseling & Campus Safety',
+    systemName: 'Emergency Dispatch & Electronic Health Records',
+    enterpriseVendor: 'Rave Mobile Safety / Motorola Solutions / PointClickCare / Titanium Schedule',
+    protocol: 'REST JSON',
+    endpoints: [
+      {
+        method: 'POST',
+        path: '/api/v1/safety/dispatch/blue-light-escort',
+        description: 'Initiates live geo-fenced travel escort timer with Campus Police dispatch telemetry.',
+        payloadOrParams: '{ studentId: "U8294", originLat: 42.36, destLat: 42.37, etaMins: 12 }',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/counseling/appointments/book-confidential',
+        description: 'HIPAA-compliant encrypted booking for university mental health and counseling services.',
+      },
+      {
+        method: 'GET',
+        path: '/api/v1/health/pharmacy/prescriptions/{rxId}/status',
+        description: 'Queries university health center pharmacy dispensary for prescription pickup readiness.',
+      },
+    ],
+    pushNotificationTriggers: [
+      { event: 'Escort Safety Check-In', priority: 'P0 Urgent', copyPreview: '🛡️ Virtual Escort: You have 2 minutes remaining on your walk. Please tap "Safe" to confirm arrival.' },
+      { event: 'Prescription Ready for Pickup', priority: 'P1 Time-Sensitive', copyPreview: '💊 Health Center Pharmacy: Prescription Rx #98214 is ready at counter 2. Bring student ID.' },
+      { event: 'Confidential Counseling Reminder', priority: 'P1 Time-Sensitive', copyPreview: '🌿 Reminder: Counseling session today at 2:00 PM (Student Wellness Center Room 304).' },
+    ],
+  },
+  finance: {
+    module: 'Financial Aid, Bursar & Micro-Grants Hub',
+    systemName: 'Student Accounts & Financial Aid Clearinghouse',
+    enterpriseVendor: 'TouchNet / Nelnet Campus Commerce / Banner Financial Aid / Workday Payroll',
+    protocol: 'REST JSON',
+    endpoints: [
+      {
+        method: 'GET',
+        path: '/api/v1/bursar/statements/current-term',
+        description: 'Retrieves itemized tuition, dorm, health insurance, institutional grant credits, and net due.',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/payroll/work-study/timesheets/submit',
+        description: 'Submits bi-weekly work-study hours to student supervisor and payroll system.',
+        payloadOrParams: '{ payPeriodId: "2026_PP22", totalHours: 10.5, supervisorEmail: "lab@univ.edu" }',
+      },
+      {
+        method: 'POST',
+        path: '/api/v1/financial-aid/micro-grants/apply-emergency',
+        description: 'Rapid intake for emergency institutional grants ($500-$1,500) with 48h emergency disbursal.',
+      },
+    ],
+    pushNotificationTriggers: [
+      { event: 'Tuition Payment Due in 7 Days', priority: 'P0 Urgent', copyPreview: '💳 Bursar Alert: Remaining term balance ($1,420.00) due Nov 15 to avoid course registration hold.' },
+      { event: 'Timesheet Due Tomorrow', priority: 'P1 Time-Sensitive', copyPreview: '⏱️ Payroll Reminder: Submit your Work-Study timesheet by 5:00 PM Friday for next week payout.' },
+      { event: 'Emergency Grant Approved', priority: 'P0 Urgent', copyPreview: '✅ Emergency Micro-Grant ($750.00) approved. Funds will hit your direct deposit in 24 hours.' },
+    ],
+  },
+};
